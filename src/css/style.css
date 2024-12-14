@@ -1,0 +1,788 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #1db954;
+  --secondary-color: #282828;
+  --accent-color: #3e3e3e;
+  --text-color: #ffffff;
+  --header-color: #171717;
+  --highlight-color: #a8a8a8;
+  --border-radius: 8px;
+  --font-family: "Arial", sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Contenedor general */
+.app-container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar */
+sidebar {
+  background-color: var(--header-color);
+  flex: 0.35;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cerrar-minimizar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 10px 0px;
+}
+
+.sidebar-filter {
+  padding: 0px 10px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+
+.sidebar-filter summary {
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/**Pongo !important porque tengo un estilo que sobreescribe a este 
+y es para que no se sobreescriba y se vea como yo quiero**/
+.search-input {
+  border-radius: 50px !important;
+  padding: 10px 20px 10px 40px !important;
+  border: 1px solid #ddd !important;
+  width: 100% !important;
+  margin-left: 20px !important;
+}
+
+.search-icon {
+  position: absolute;
+  color: #171717;
+  margin-left: 20px;
+  top: 8px;
+  right: 222px;
+}
+
+.sidebar-filter[open] {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+.sidebar-filter[open] .filter-option {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.filter-option {
+  display: none;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-weight: bold;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+
+.red,
+.yellow,
+.green {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.red:hover,
+.yellow:hover,
+.green:hover {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
+.green {
+  background-color: green;
+}
+
+.filter-input {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  outline: none;
+}
+
+.imagen-cancion {
+  width: 100%;
+  height: 70%;
+  margin-bottom: 25%;
+}
+
+/* Cuadro de imagen en el sidebar */
+.cuadro-imagen {
+  width: 100%;
+  height: 43%;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  padding: 20px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(var(--accent-color), var(--header-color));
+  padding: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--accent-color);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: auto;
+}
+
+.search-bar {
+  display: flex;
+  position: relative;
+  flex-direction: column-reverse;
+  gap: 24px;
+}
+
+.search-bar input {
+  background-color: var(--text-color);
+  color: black;
+  border: none;
+  padding: 6px;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  padding-left: 22px;
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.pause-add {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 48px;
+}
+
+.img-perfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.pause-btn {
+  background-color: var(--primary-color);
+  border: none;
+  padding: 12px 32px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text-color);
+  transition: transform 0.3s ease;
+}
+
+.pause-btn:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.add-icon {
+  font-size: 32px;
+  transition: transform 0.3s ease;
+}
+.add-icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* Music Table */
+.music-table {
+  flex: 1;
+  padding: 20px;
+  box-shadow: 0px 10px 20px black;
+  overflow-y: auto;
+  height: calc(100vh - 25%);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+thead tr {
+  position: sticky;
+  top: 0;
+  background-color: var(--secondary-color);
+  z-index: 1;
+}
+
+th,
+td {
+  padding: 12px;
+  font-size: 16px;
+}
+
+th {
+  border-bottom: 1px solid var(--accent-color);
+  text-align: center;
+}
+
+td {
+  border-top: 1px solid var(--accent-color);
+  text-align: center;
+}
+
+.cancion-titulo {
+  padding-left: 10%;
+  position: relative;
+}
+.canciones:hover {
+  background-color: var(--accent-color);
+  cursor: pointer;
+}
+.cancion-titulo::after {
+  content: url("../images/play-songs.png");
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.canciones:hover .cancion-titulo::after {
+  opacity: 1;
+}
+
+/* Icono de corazón */
+.corazon {
+  transition: transform 0.3s ease;
+}
+.corazon:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.2);
+}
+.corazon.active {
+  background-color: #1db954;
+}
+
+.current-artist {
+  max-width: 100px;
+}
+
+/* Footer (Player Controls) */
+.player-controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 12%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--header-color);
+  padding: 10px 20px;
+  border-top: 1px solid var(--accent-color);
+  z-index: 10;
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+  color: var(--highlight-color);
+  font-size: 12px;
+}
+
+.song-info .current-song {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.center-footer {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+  align-items: center;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  font-size: 18px;
+}
+
+.antes-icon:hover,
+.siguiente-icon:hover,
+.aleatorio-icon:hover,
+.repeat-icon:hover {
+  cursor: pointer;
+}
+
+.play-icon {
+  transition: transform 0.3s ease;
+}
+.play-icon:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.volume-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progress-bar {
+  width: 848px;
+  height: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 848px;
+}
+
+.volume-control {
+  width: 120px;
+  height: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.time-display {
+  font-size: 12px;
+  color: var(--highlight-color);
+}
+
+/* Estilos del modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 20;
+}
+.modal-content {
+  background-color: white;
+  padding: 16px 72px;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 60%;
+  margin-left: 21%;
+  margin-top: 7%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+.close-btn {
+  font-size: 44px;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.title-modal {
+  color: black;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+input[type="text"],
+input[type="file"] {
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--accent-color);
+  background-color: white;
+  font-size: 16px;
+}
+
+.button-add {
+  display: flex;
+  justify-content: center;
+}
+.button-subir {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 20%;
+}
+.button-subir:hover {
+  background-color: #1a9e47;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 700px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura altura mínima para el contenedor */
+  }
+  sidebar {
+    flex: 1; /* Ocupa todo el ancho en pantallas pequeñas */
+    padding: 10px; /* Añade padding para un mejor espaciado */
+  }
+  .cuadro-imagen {
+    max-height: 217px;
+    height: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .cuadro-imagen img {
+    width: 300px;
+    height: 200px;
+    margin-top: 90px;
+  }
+  .music-table {
+    margin-bottom: 120px; /* Ajusta el margen inferior para espacio adicional */
+  }
+  .header {
+    display: none;
+  }
+  .search-bar {
+    display: none; /* Oculta la barra de búsqueda en pantallas pequeñas */
+  }
+  .button-add {
+    display: none; /* Oculta el botón de añadir en pantallas pequeñas */
+  }
+  .player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra verticalmente los controles */
+    padding: 10px;
+    background-color: #282828; /* Fondo para mayor visibilidad */
+    border-top: 1px solid #ccc; /* Línea superior para separar */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    position: fixed; /* Fija la posición en la parte inferior */
+    bottom: 0; /* Coloca el contenedor en la parte inferior */
+    z-index: 10; /* Asegura que esté por encima de otros elementos */
+    height: 21%;
+  }
+  .song-info {
+    text-align: center; /* Centra el texto de la información de la canción */
+  }
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espacio entre controles */
+    width: 100%;
+  }
+  .time-section {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Ajusta el tamaño de la barra */
+    margin: 10px 0;
+  }
+  .progress-bar {
+    width: 100%; /* Ajusta el tamaño de la barra */
+    margin: 10px 0;
+    height: 8px; /* Altura visible para la barra */
+    background: #ddd;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+  }
+  .volume-section {
+    display: none; /* Oculta el control de volumen si no lo necesitas */
+  }
+  .user-controls .pause-add {
+    display: none; /* Oculta el contenedor que incluye el botón PLAY y el icono de añadir */
+  }
+  .user-info {
+    display: none; /* Oculta la información del usuario */
+  }
+  .user-controls {
+    width: 100%; /* Asegura que los controles de usuario ocupen todo el ancho */
+    justify-content: space-between; /* Espacio entre controles */
+    margin-bottom: 10px; /* Espacio entre controles de usuario y tabla */
+  }
+}
+
+@media (max-width: 400px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura altura mínima para el contenedor */
+  }
+  sidebar {
+    flex: 1; /* Ocupa todo el ancho en pantallas pequeñas */
+    padding: 10px; /* Añade padding para un mejor espaciado */
+  }
+  .cuadro-imagen {
+    max-height: 217px;
+    height: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .cuadro-imagen img {
+    width: 300px;
+    height: 200px;
+    margin-top: 90px;
+  }
+  .music-table {
+    margin-bottom: 120px; /* Ajusta el margen inferior para espacio adicional */
+  }
+  .header {
+    display: none;
+  }
+  .search-bar {
+    display: none; /* Oculta la barra de búsqueda en pantallas pequeñas */
+  }
+  .button-add {
+    display: none; /* Oculta el botón de añadir en pantallas pequeñas */
+  }
+  .player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra verticalmente los controles */
+    padding: 10px;
+    background-color: #282828; /* Fondo para mayor visibilidad */
+    border-top: 1px solid #ccc; /* Línea superior para separar */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    position: fixed; /* Fija la posición en la parte inferior */
+    bottom: 0; /* Coloca el contenedor en la parte inferior */
+    z-index: 10; /* Asegura que esté por encima de otros elementos */
+    height: 23%;
+  }
+  .song-info {
+    text-align: center; /* Centra el texto de la información de la canción */
+  }
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espacio entre controles */
+    width: 100%;
+  }
+  .time-section {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Ajusta el tamaño de la barra */
+    margin: 10px 0;
+  }
+  .progress-bar {
+    width: 100%; /* Ajusta el tamaño de la barra */
+    margin: 10px 0;
+    height: 8px; /* Altura visible para la barra */
+    background: #ddd;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+  }
+  .volume-section {
+    display: none; /* Oculta el control de volumen si no lo necesitas */
+  }
+  .user-controls .pause-add {
+    display: none; /* Oculta el contenedor que incluye el botón PLAY y el icono de añadir */
+  }
+  .user-info {
+    display: none; /* Oculta la información del usuario */
+  }
+  .user-controls {
+    width: 100%; /* Asegura que los controles de usuario ocupen todo el ancho */
+    justify-content: space-between; /* Espacio entre controles */
+    margin-bottom: 10px; /* Espacio entre controles de usuario y tabla */
+  }
+}
+
+@media (max-width: 1075px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura altura mínima para el contenedor */
+  }
+
+  sidebar {
+    flex: 1; /* Ocupa todo el ancho en pantallas pequeñas */
+    padding: 10px; /* Añade padding para un mejor espaciado */
+  }
+
+  .cuadro-imagen {
+    max-height: 217px;
+    height: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .cuadro-imagen img {
+    width: 300px;
+    height: 200px;
+    margin-top: 25%;
+  }
+
+  .music-table {
+    margin-bottom: 120px; /* Ajusta el margen inferior para espacio adicional */
+  }
+
+  .header {
+    display: none;
+  }
+
+  .search-bar {
+    display: none; /* Oculta la barra de búsqueda en pantallas pequeñas */
+  }
+
+  .button-add {
+    display: none; /* Oculta el botón de añadir en pantallas pequeñas */
+  }
+
+  .player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra verticalmente los controles */
+    padding: 10px;
+    background-color: #282828; /* Fondo para mayor visibilidad */
+    border-top: 1px solid #ccc; /* Línea superior para separar */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    position: fixed; /* Fija la posición en la parte inferior */
+    bottom: 0; /* Coloca el contenedor en la parte inferior */
+    z-index: 10; /* Asegura que esté por encima de otros elementos */
+    height: 21%;
+  }
+
+  .song-info {
+    text-align: center; /* Centra el texto de la información de la canción */
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espacio entre controles */
+    width: 100%;
+  }
+
+  .time-section {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Ajusta el tamaño de la barra */
+    margin: 10px 0;
+  }
+
+  .progress-bar {
+    width: 100%; /* Ajusta el tamaño de la barra */
+    margin: 10px 0;
+    height: 8px; /* Altura visible para la barra */
+    background: #ddd;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .volume-section {
+    display: none; /* Oculta el control de volumen si no lo necesitas */
+  }
+
+  .user-controls .pause-add {
+    display: none; /* Oculta el contenedor que incluye el botón PLAY y el icono de añadir */
+  }
+
+  .user-info {
+    display: none; /* Oculta la información del usuario */
+  }
+
+  .user-controls {
+    width: 100%; /* Asegura que los controles de usuario ocupen todo el ancho */
+    justify-content: space-between; /* Espacio entre controles */
+    margin-bottom: 10px; /* Espacio entre controles de usuario y tabla */
+  }
+}
